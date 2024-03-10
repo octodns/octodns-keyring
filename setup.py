@@ -20,12 +20,7 @@ def version():
 
 description, long_description = descriptions()
 
-tests_require = (
-    'pytest',
-    'pytest-cov',
-    'pytest-network',
-    # TODO: other test-time requirements
-)
+tests_require = ('pytest', 'pytest-cov', 'pytest-network')
 
 setup(
     author='Ross McFarland',
@@ -47,10 +42,7 @@ setup(
         ),
         'test': tests_require,
     },
-    install_requires=(
-        'octodns>=1.0.0',
-        # TODO: other requirements
-    ),
+    install_requires=('keyring>=24.3.1', 'octodns>=1.0.0'),
     license='MIT',
     long_description=long_description,
     long_description_content_type='text/markdown',

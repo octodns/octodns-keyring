@@ -1,11 +1,3 @@
-## TODO: v0.0.1 - 20??-??-?? - Moving
+## v0.0.1 - 20??-??-?? - It's a secret
 
-#### Nothworthy Changes
-
-* Initial extraction of KeyringSecrets from octoDNS core
-
-TODO: anything else
-
-#### Stuff
-
-TODO: anything else
+* Initial version of provider
