@@ -34,19 +34,19 @@ class TestKeyringSecrets(TestCase):
             'Unknown backend class: "helpers.NoSuchClass"', str(ctx.exception)
         )
 
+        ks = KeyringSecrets('test', backend='submod.helpers.SubmodBackend')
+        # same here
+        self.assertEqual('SubmodBackend', ks.backend.__class__.__name__)
+        self.assertEqual(
+            'submod-octodns-the-secret', ks.fetch('octodns/the-secret', None)
+        )
+
         ks = KeyringSecrets('test', backend='helpers.DummyBackend')
         # not importing and using the class object here so we don't help the
         # code by having everything imported beforhand
         self.assertEqual('DummyBackend', ks.backend.__class__.__name__)
         self.assertEqual(
             'dummy-octodns-the-secret', ks.fetch('octodns/the-secret', None)
-        )
-
-        ks = KeyringSecrets('test', backend='submod.helpers.SubmodBackend')
-        # same here
-        self.assertEqual('SubmodBackend', ks.backend.__class__.__name__)
-        self.assertEqual(
-            'submod-octodns-the-secret', ks.fetch('octodns/the-secret', None)
         )
 
         ks = KeyringSecrets('test', backend='helpers.NoneBackend')
