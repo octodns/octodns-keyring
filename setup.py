@@ -42,7 +42,7 @@ setup(
         ),
         'test': tests_require,
     },
-    install_requires=('keyring>=24.3.1', 'octodns>=1.0.0'),
+    install_requires=('keyring>=24.3.1', 'octodns>=1.6.0'),
     license='MIT',
     long_description=long_description,
     long_description_content_type='text/markdown',
