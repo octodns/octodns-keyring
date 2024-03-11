@@ -14,7 +14,4 @@ if [ ! -f "$ACTIVATE" ]; then
 fi
 . "$ACTIVATE"
 
-# TODO: ensure any common env var secrets have been cleared
-export TODO_ACCESS_KEY_ID=
-
 pytest --disable-network "$@"

@@ -1,8 +1,6 @@
-TODO: Review this README and add or modify as necessary.
-
 ## keyring provider for octoDNS
 
-An [octoDNS](https://github.com/octodns/octodns/) provider that targets [keyring](https://pypi.org/project/keyring/).
+An [octoDNS](https://github.com/octodns/octodns/) secrets handler that targets [keyring](https://pypi.org/project/keyring/).
 
 ### Installation
 
@@ -35,24 +33,21 @@ octodns-keyring==0.0.1
 ### Configuration
 
 ```yaml
-providers:
+secret_handlers:
   keyring:
     class: octodns_keyring.KeyringSecrets
-    # TODO
+    # The keyring backend to use (optional.) If omitted keyrings built-in
+    # process will apply
+    backend: keyring.backends.null.Keyring
+
+providers:
+  route53:
+    class: octodns_route53.Ec2Source
+    access_key_id: keyring/octodns/AWS_ACCESS_KEY_ID
+    secret_access_key: keyring/octodns/AWS_SECRET_ACCESS_KEY
+    region: us-east-1
 ```
-
-### Support Information
-
-#### Records
-
-TODO: All octoDNS record types are supported.
-
-#### Dynamic
-
-TODO: KeyringSecrets does not support dynamic records.
 
 ### Development
 
 See the [/script/](/script/) directory for some tools to help with the development process. They generally follow the [Script to rule them all](https://github.com/github/scripts-to-rule-them-all) pattern. Most useful is `./script/bootstrap` which will create a venv and install both the runtime and development related requirements. It will also hook up a pre-commit hook that covers most of what's run by CI.
-
-TODO: any provider specific setup, a docker compose to run things locally etc?
