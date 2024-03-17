@@ -57,7 +57,18 @@ class KeyringSecrets(BaseSecrets):
 
     def fetch(self, name, source):
         service_name, secret_name = name.split('/')
-        ret = self.backend.get_password(service_name, secret_name)
-        if ret is None:
+        val = self.backend.get_password(service_name, secret_name)
+        if val is None:
             raise KeyringSecretsException(f'failed to find {name}')
-        return ret
+        if isinstance(val, str):
+            try:
+                if '.' in val:
+                    # there's a ., try as a float
+                    val = float(val)
+                else:
+                    # otherwise see if we can make an int of it
+                    val = int(val)
+            except:
+                # didn't work, leave it as-is, a string
+                pass
+        return val

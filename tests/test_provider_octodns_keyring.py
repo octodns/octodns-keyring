@@ -57,3 +57,27 @@ class TestKeyringSecrets(TestCase):
         self.assertEqual(
             'failed to find octodns/the-secret', str(ctx.exception)
         )
+
+    def test_type_conversion(self):
+        ks = KeyringSecrets('test', backend='helpers.UsernameBackend')
+        self.assertEqual(
+            'this-is-a-string', ks.fetch('octodns/this-is-a-string', None)
+        )
+        val = ks.fetch('octodns/this-is-a.nother-with-dot', None)
+        self.assertEqual('this-is-a.nother-with-dot', val)
+        self.assertIsInstance(val, str)
+
+        val = ks.fetch('octodns/42', None)
+        self.assertEqual(42, val)
+        self.assertIsInstance(val, int)
+
+        val = ks.fetch('octodns/43.44', None)
+        self.assertEqual(43.44, val)
+        self.assertIsInstance(val, float)
+
+        # this backend returns a specific type (not a string) so no conversion
+        # is attempted
+        ks = KeyringSecrets('test', backend='helpers.TupleBackend')
+        val = ks.fetch('octodns/ignored', None)
+        self.assertEqual((42,), val)
+        self.assertIsInstance(val, tuple)
