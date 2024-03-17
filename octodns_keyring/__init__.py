@@ -22,9 +22,12 @@ class KeyringSecretsBackendException(KeyringSecretsException):
 
 
 class KeyringSecrets(BaseSecrets):
-    def __init__(self, name, backend=None):
+    def __init__(self, name, backend=None, **kwargs):
         super().__init__(name)
         self.backend = self._load_backend(backend)
+
+        for k, v in kwargs.items():
+            setattr(self.backend, k, v)
 
     def _load_backend(self, backend):
         if backend is None:

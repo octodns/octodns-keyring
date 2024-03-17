@@ -39,6 +39,9 @@ secret_handlers:
     # The keyring backend to use (optional.) If omitted keyrings built-in
     # process will apply
     backend: keyring.backends.null.Keyring
+    # Any other key and value pairs will be assigned to attributes on the
+    # backend once it's been created. (optional)
+    some_backend_property: 42
 
 providers:
   route53:
