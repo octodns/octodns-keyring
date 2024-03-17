@@ -81,3 +81,10 @@ class TestKeyringSecrets(TestCase):
         val = ks.fetch('octodns/ignored', None)
         self.assertEqual((42,), val)
         self.assertIsInstance(val, tuple)
+
+    def test_params(self):
+        filename = '/find/it/here'
+        ks = KeyringSecrets(
+            'test', backend='helpers.DummyBackend', filename=filename
+        )
+        self.assertEqual(filename, ks.backend.filename)
