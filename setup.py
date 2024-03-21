@@ -26,7 +26,7 @@ setup(
     author='Ross McFarland',
     author_email='rwmcfa1@gmail.com',
     entry_points={
-        'console_scripts': {'octodns-keyring': 'octodns_keyring.cmds:main'}
+        'console_scripts': {'octodns-keyring = octodns_keyring.cmds:main'}
     },
     description=description,
     extras_require={
