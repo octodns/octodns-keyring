@@ -31,6 +31,13 @@ def main():
         help='Fetch and print the existing values',
     )
     parser.add_argument(
+        '--delete',
+        action='store_true',
+        default=False,
+        required=False,
+        help='Delete existing secrets',
+    )
+    parser.add_argument(
         'names',
         nargs='*',
         help='Values to set in the keyring backend. Format service_name/secret_name, e.g. octodns/ns1_api_key. Multiple secrets are space seperated. User will be prompted for the value of each',
@@ -49,6 +56,9 @@ def main():
         if args.fetch:
             value = ks.fetch(name, None)
             print(f'{name}={value}')
+        elif args.delete:
+            ks.delete(name)
+            print(f'{name} *deleted*')
         else:
             value = getpass(f'{name}: ')
             ks.set(name, value)

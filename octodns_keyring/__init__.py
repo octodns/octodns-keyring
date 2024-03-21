@@ -58,12 +58,15 @@ class KeyringSecrets(BaseSecrets):
 
         return klass()
 
+    def _parse_name(self, name):
+        return name.split('/')
+
     def set(self, name, value):
-        service_name, secret_name = name.split('/')
+        service_name, secret_name = self._parse_name(name)
         self.backend.set_password(service_name, secret_name, value)
 
     def fetch(self, name, source):
-        service_name, secret_name = name.split('/')
+        service_name, secret_name = self._parse_name(name)
         val = self.backend.get_password(service_name, secret_name)
         if val is None:
             raise KeyringSecretsException(f'failed to find {name}')
@@ -79,3 +82,7 @@ class KeyringSecrets(BaseSecrets):
                 # didn't work, leave it as-is, a string
                 pass
         return val
+
+    def delete(self, name):
+        service_name, secret_name = self._parse_name(name)
+        self.backend.delete_password(service_name, secret_name)

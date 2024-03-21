@@ -98,3 +98,7 @@ class TestKeyringSecrets(TestCase):
         value = 'Hello World!'
         ks.set('octodns/key', value)
         self.assertEqual(value, ks.fetch('octodns/key', None))
+
+        ks.delete('octodns/key')
+        with self.assertRaises(KeyringSecretsException):
+            ks.fetch('octodns/key', None)

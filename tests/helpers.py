@@ -74,7 +74,7 @@ class DictBackend(KeyringBackend):
         self.data[f'{servicename}/{username}'] = password
 
     def delete_password(self, servicename, username):
-        self.data[f'{servicename}/{username}'].pop()
+        self.data.pop(f'{servicename}/{username}')
 
     def get_password(self, servicename, username):
         return self.data.get(f'{servicename}/{username}')
