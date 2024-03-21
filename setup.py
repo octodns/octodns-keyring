@@ -25,6 +25,9 @@ tests_require = ('pytest', 'pytest-cov', 'pytest-network')
 setup(
     author='Ross McFarland',
     author_email='rwmcfa1@gmail.com',
+    entry_points={
+        'console_scripts': {'octodns-keyring': 'octodns_keyring.cmds:main'}
+    },
     description=description,
     extras_require={
         'dev': tests_require

@@ -58,6 +58,10 @@ class KeyringSecrets(BaseSecrets):
 
         return klass()
 
+    def set(self, name, value):
+        service_name, secret_name = name.split('/')
+        self.backend.set_password(service_name, secret_name, value)
+
     def fetch(self, name, source):
         service_name, secret_name = name.split('/')
         val = self.backend.get_password(service_name, secret_name)

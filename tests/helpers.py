@@ -59,3 +59,22 @@ class TupleBackend(KeyringBackend):
 
     def get_password(self, servicename, username):
         return (42,)
+
+
+class DictBackend(KeyringBackend):
+    '''Always returns a tuple with the answer to everything'''
+
+    priority = 1
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.data = {}
+
+    def set_password(self, servicename, username, password):
+        self.data[f'{servicename}/{username}'] = password
+
+    def delete_password(self, servicename, username):
+        self.data[f'{servicename}/{username}'].pop()
+
+    def get_password(self, servicename, username):
+        return self.data.get(f'{servicename}/{username}')
