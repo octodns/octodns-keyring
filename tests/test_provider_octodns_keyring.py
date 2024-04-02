@@ -88,3 +88,17 @@ class TestKeyringSecrets(TestCase):
             'test', backend='helpers.DummyBackend', filename=filename
         )
         self.assertEqual(filename, ks.backend.filename)
+
+    def test_set(self):
+        ks = KeyringSecrets('test', backend='helpers.DictBackend')
+
+        with self.assertRaises(KeyringSecretsException):
+            ks.fetch('octodns/key', None)
+
+        value = 'Hello World!'
+        ks.set('octodns/key', value)
+        self.assertEqual(value, ks.fetch('octodns/key', None))
+
+        ks.delete('octodns/key')
+        with self.assertRaises(KeyringSecretsException):
+            ks.fetch('octodns/key', None)
