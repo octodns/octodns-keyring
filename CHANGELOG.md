@@ -2,6 +2,7 @@
 
 * octodns-keyring tool added to enable secret management
 * KeyringSecrets.set & delete methods added, used by ^
+* Address pending octoDNS 2.x deprecations, require minimum of 1.5.x
 
 ## v0.0.2 - 2024-03-17 - What type is that thingy in the window
 
