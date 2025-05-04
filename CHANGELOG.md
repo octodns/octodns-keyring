@@ -1,4 +1,4 @@
-## v0.0.3 - 2024-??-?? - ???
+## v1.0.0 - 2025-05-04 - 1.0
 
 * octodns-keyring tool added to enable secret management
 * KeyringSecrets.set & delete methods added, used by ^
